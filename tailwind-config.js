@@ -79,11 +79,12 @@ tailwind.config = {
             "fontSize": {
                 "body-lg": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
                 "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "label-sm": ["10px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
                 "h2": ["24px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
                 "h1": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "600"}],
                 "code": ["13px", {"lineHeight": "1.45", "letterSpacing": "0", "fontWeight": "400"}],
                 "h3": ["20px", {"lineHeight": "1.25", "letterSpacing": "0", "fontWeight": "600"}],
-                "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+                "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
             }
         }
     }
