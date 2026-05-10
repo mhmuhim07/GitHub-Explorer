@@ -20,6 +20,21 @@ class App {
     this.searchBtn = document.getElementById("search-btn");
     this.searchInput = document.getElementById("search-input");
     this.themeToggleBtn = document.getElementById("theme-toggle");
+    this.compareBtn = document.querySelector("#nav-compare-btn");
+    this.compareBtn1 = document.querySelector("#compare-search-input-1");
+    this.compareBtn2 = document.querySelector("#compare-search-input-2");
+    this.compareBtnSearch = document.querySelector("#compare-search-btn");
+
+    this.compareBtn.addEventListener("click", () => {
+      console.log("compare btn clicked");
+      this.ui.toggleCompareMode();
+    });
+
+    this.compareBtnSearch.addEventListener("click", () => {
+      console.log("compare btn search clicked");
+      this.fetchCompareUsers();
+    });
+
     this.ui.showState(this.ui.stateInitial);
 
     this.themeToggleBtn.addEventListener("click", () => this.themeToggle());
@@ -33,6 +48,39 @@ class App {
       this.restoreFromUrl();
     });
   }
+  async fetchCompareUsers() {
+    const username1 = this.compareBtn1.value.trim();
+    const username2 = this.compareBtn2.value.trim();
+
+    if (!username1 || !username2) {
+      console.error("Both usernames required for comparison");
+      return;
+    }
+    try {
+      const [user1, user2] = await Promise.all([
+        this.api.getUser(username1),
+        this.api.getUser(username2),
+      ]);
+
+      const [user1Repos, user2Repos] = await Promise.all([
+        this.api.getUserRepos(username1),
+        this.api.getUserRepos(username2),
+      ]);
+
+      console.log("User 1:", user1);
+      console.log("User 2:", user2);
+
+      console.log("User 1 Repos:", user1Repos);
+      console.log("User 2 Repos:", user2Repos);
+
+      this.ui.displayCompareUsers(user1, user2, user1Repos, user2Repos);
+
+    } catch (error) {
+      console.error("Error fetching users for comparison:", error);
+      this.ui.displayError(error);
+    }
+  }
+
   async fetchUser(username) {
     try {
       this.ui.displayLoading();
